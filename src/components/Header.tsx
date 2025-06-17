@@ -1,11 +1,12 @@
 import React from 'react';
-import { Calendar, Menu, Search, Bell } from 'lucide-react';
+import { Calendar, Menu, Search, Bell, Shield } from 'lucide-react';
 
 interface HeaderProps {
   onDateSelect: () => void;
+  onAdminLogin?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onDateSelect }) => {
+const Header: React.FC<HeaderProps> = ({ onDateSelect, onAdminLogin }) => {
   const today = new Date();
   const marathiDate = today.toLocaleDateString('mr-IN', {
     weekday: 'long',
@@ -35,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ onDateSelect }) => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-red-600 font-baloo">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-red-600 font-baloo">
             बंजारा पुकार 
             </h1>
             <p className="text-sm text-gray-600 font-tiro mt-5">
@@ -63,6 +64,16 @@ const Header: React.FC<HeaderProps> = ({ onDateSelect }) => {
               <Calendar className="w-4 h-4" />
               <span className="hidden sm:inline">दिनांक निवडा</span>
             </button>
+            {onAdminLogin && (
+              <button
+                onClick={onAdminLogin}
+                className="flex items-center space-x-2 bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                title="Admin Login"
+              >
+                <Shield className="w-4 h-4" />
+                <span className="hidden sm:inline">Admin</span>
+              </button>
+            )}
             <Menu className="w-6 h-6 text-gray-600 cursor-pointer hover:text-red-600 lg:hidden" />
           </div>
         </div>
